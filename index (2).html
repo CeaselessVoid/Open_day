@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#050B1A">
+<title>Additional figures | Induction machine condition monitoring</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%230B1F45' stroke='%235BB0E6' stroke-width='5'/%3E%3Cpath d='M12 34h10l6-14 8 26 6-12h10' fill='none' stroke='%235BB0E6' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+:root{
+  --black:#000;
+  --ink:#050B1A;
+  --navy:#0B1F45;
+  --line:rgba(91,176,230,.28);
+  --accent:#5BB0E6;
+  --text:#E8EEF8;
+  --muted:#9AA9C2;
+  --serif:"Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --sans:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--black)}
+body{
+  margin:0;color:var(--text);font-family:var(--sans);line-height:1.5;
+  background:linear-gradient(180deg,var(--navy) 0,var(--ink) 38rem,var(--black) 100%) no-repeat;
+  min-height:100vh;
+}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+
+/* opening */
+.hero{max-width:60rem;margin:0 auto;padding:clamp(3rem,10vh,6rem) 1.25rem 2rem}
+.hero h1{margin:0;font-family:var(--serif);font-weight:400;font-size:clamp(2.4rem,7vw,4.6rem);line-height:1.05;letter-spacing:-.01em}
+.hero .for{margin:1.25rem 0 0;font-family:var(--serif);font-size:clamp(1.1rem,2.6vw,1.6rem);line-height:1.3;color:var(--muted);max-width:42rem}
+.hero .by{margin:1.5rem 0 0;font-size:.95rem;color:var(--muted)}
+.jump{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:2rem}
+.jump a{padding:.55rem 1rem;border:1px solid var(--line);border-radius:999px;text-decoration:none;color:var(--text);font-size:.95rem}
+.jump a:hover{border-color:var(--accent);background:rgba(91,176,230,.1)}
+
+/* sections */
+section{max-width:70rem;margin:0 auto;padding:3.5rem 1.25rem 1rem;scroll-margin-top:1rem}
+section h2{margin:0 0 1.25rem;padding-bottom:.6rem;border-bottom:1px solid var(--line);font-family:var(--serif);font-weight:400;font-size:clamp(1.5rem,3.8vw,2.3rem)}
+
+section .intro{margin:0 0 1.5rem;max-width:46rem;color:var(--muted);font-size:1.05rem}
+
+/* slideshow */
+.show{outline-offset:6px}
+.stage{position:relative;aspect-ratio:16/10;background:#02050C;border:1px solid var(--line);border-radius:10px;overflow:hidden;display:grid;place-items:center}
+.stage img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;cursor:zoom-in;display:block}
+.stage .missing{padding:1.5rem;text-align:center;color:var(--muted);font-size:.95rem}
+.stage .missing code{display:block;margin-top:.4rem;color:var(--accent);word-break:break-all}
+.nav{position:absolute;top:50%;transform:translateY(-50%);width:2.9rem;height:2.9rem;border-radius:50%;border:1px solid var(--line);background:rgba(5,11,26,.72);color:var(--text);font-size:1.7rem;line-height:1;cursor:pointer;display:grid;place-items:center;padding:0 0 .2rem}
+.nav:hover{border-color:var(--accent);color:var(--accent)}
+.prev{left:.7rem}.next{right:.7rem}
+.meta{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;margin-top:.8rem;min-height:1.6rem}
+.cap{margin:0;color:var(--text);font-size:1rem;max-width:46rem}
+.tools{display:flex;gap:1rem;align-items:baseline;white-space:nowrap;font-size:.9rem;color:var(--muted)}
+.dots{display:flex;flex-wrap:wrap;gap:.2rem;margin-top:.4rem}
+.dots button{width:1.9rem;height:1.9rem;border:0;background:none;cursor:pointer;display:grid;place-items:center;padding:0}
+.dots button::before{content:"";width:.65rem;height:.65rem;border-radius:50%;background:rgba(154,169,194,.45)}
+.dots button[aria-current="true"]::before{background:var(--accent);transform:scale(1.25)}
+
+/* full-screen view */
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.94);display:grid;place-items:center;padding:1rem;z-index:10;cursor:zoom-out}
+#lb[hidden]{display:none}
+#lb img{max-width:100%;max-height:100%;object-fit:contain}
+#lb button{position:absolute;top:.8rem;right:.8rem;width:2.9rem;height:2.9rem;border-radius:50%;border:1px solid var(--line);background:rgba(5,11,26,.85);color:var(--text);font-size:1.5rem;cursor:pointer}
+
+footer{max-width:70rem;margin:0 auto;padding:3rem 1.25rem 3rem;color:var(--muted);font-size:.9rem}
+
+@media (max-width:640px){
+  .stage{aspect-ratio:4/3}
+  .nav{width:2.5rem;height:2.5rem;font-size:1.4rem}
+  .meta{flex-direction:column;gap:.3rem}
+}
+@media (prefers-reduced-motion:no-preference){
+  .stage img{animation:in .25s ease-out}
+  @keyframes in{from{opacity:0}to{opacity:1}}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>Additional figures</h1>
+  <p class="for">See below the results obtained during the life cycle of the project.</p>
+  <p class="by">Ngari Marshall Njeru, Department of Electrical Engineering, University of Cape Town</p>
+  <nav class="jump" aria-label="Sections">
+    <a href="#mcsa">MCSA</a>
+    <a href="#flux">Magnetic flux</a>
+    <a href="#extra">Additional findings</a>
+  </nav>
+</header>
+
+<main id="sections"></main>
+
+<footer>Contact: ngrmar007@myuct.ac.za</footer>
+
+<div id="lb" hidden role="dialog" aria-modal="true" aria-label="Full-screen image">
+  <img alt="">
+  <button type="button" aria-label="Close full-screen image">&times;</button>
+</div>
+
+<noscript><p style="padding:1.25rem;text-align:center">Turn on JavaScript to view the image slideshows.</p></noscript>
+
+<script>
+/* ============================================================
+   EDIT HERE. To add an image: put the file in the "images" folder,
+   then add a line like  {src:'images/mcsa-4.png', caption:'Optional caption'},
+   Leave caption as '' for no caption. Order here = order on the page.
+   ============================================================ */
+const SECTIONS = [
+  { id:'mcsa',  title:'MCSA graphics and tables', slides:[
+    {src:'images/Full_fft_mcsa_0T.png',  caption:'Current FFT at no load'},
+    {src:'images/Full_fft_mcsa_5T.png',  caption:'Current FFT at 5% servo load'},
+    {src:'images/Full_fft_mcsa_20T.png', caption:'Current FFT at 20% servo load'},
+  ]},
+  { id:'flux',  title:'Magnetic flux graphics and tables', slides:[
+    {src:'images/flux_0T.png',  caption:'Flux FFT at no load'},
+    {src:'images/flux_5T.png',  caption:'Flux FFT at 5% servo load'},
+    {src:'images/flux_20T.png', caption:'Flux FFT at 20% servo load'},
+  ]},
+  { id:'extra', title:'Additional findings graphics',
+    intro:'The flux data did not show the expected fundamental at 50 Hz; it appeared close to F/4. This reduced the fidelity of the flux frequency spectrum, so a preset value for the fundamental frequency was used in the fault analysis. The figures below show the component under different conditions.',
+    slides:[
+    {src:'images/13_Hz_test_Loading.png', caption:'F/4 component under heavy load (20% servo)'},
+    {src:'images/Vibration_test.png',     caption:'F/4 component with forced vibrations on the probe'},
+    {src:'images/Roy_machine.png',        caption:'Axial flux measured on a different machine, with a fundamental of 32 Hz'},
+  ]},
+];
+/* ============================================================ */
+
+const main = document.getElementById('sections');
+const lb = document.getElementById('lb'), lbImg = lb.querySelector('img'), lbClose = lb.querySelector('button');
+let lastFocus = null;
+
+function openLb(src, alt){ lastFocus = document.activeElement; lbImg.src = src; lbImg.alt = alt; lb.hidden = false; lbClose.focus(); }
+function closeLb(){ lb.hidden = true; lbImg.removeAttribute('src'); if (lastFocus) lastFocus.focus(); }
+lb.addEventListener('click', closeLb);
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !lb.hidden) closeLb(); });
+
+SECTIONS.forEach(sec => {
+  const el = document.createElement('section');
+  el.id = sec.id; el.setAttribute('aria-labelledby', sec.id + '-h');
+  el.innerHTML =
+    `<h2 id="${sec.id}-h"></h2>
+     ${sec.intro ? '<p class="intro"></p>' : ''}
+     <div class="show" tabindex="0" role="group" aria-roledescription="carousel">
+       <div class="stage">
+         <button class="nav prev" type="button" aria-label="Previous image">&#8249;</button>
+         <img alt="">
+         <div class="missing" hidden></div>
+         <button class="nav next" type="button" aria-label="Next image">&#8250;</button>
+       </div>
+       <div class="meta">
+         <p class="cap" aria-live="polite"></p>
+         <div class="tools"><span class="count"></span><a class="full" target="_blank" rel="noopener">Open full size</a></div>
+       </div>
+       <div class="dots"></div>
+     </div>`;
+  main.appendChild(el);
+  el.querySelector('h2').textContent = sec.title;
+  if (sec.intro) el.querySelector('.intro').textContent = sec.intro;
+  el.querySelector('.show').setAttribute('aria-label', sec.title);
+
+  const show = el.querySelector('.show'), img = el.querySelector('.stage img'),
+        missing = el.querySelector('.missing'), cap = el.querySelector('.cap'),
+        count = el.querySelector('.count'), full = el.querySelector('.full'),
+        dots = el.querySelector('.dots'), n = sec.slides.length;
+  let i = 0;
+
+  sec.slides.forEach((_, k) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.setAttribute('aria-label', 'Show image ' + (k + 1));
+    b.addEventListener('click', () => go(k)); dots.appendChild(b);
+  });
+
+  function go(k){
+    i = (k + n) % n;
+    const s = sec.slides[i];
+    missing.hidden = true; img.hidden = false;
+    img.src = s.src;
+    img.alt = s.alt || s.caption || sec.title + ', image ' + (i + 1);
+    cap.textContent = s.caption || '';
+    count.textContent = (i + 1) + ' of ' + n;
+    full.href = s.src;
+    [...dots.children].forEach((b, k) => b.setAttribute('aria-current', k === i));
+    [i + 1, i - 1].forEach(k => { new Image().src = sec.slides[(k + n) % n].src; });
+  }
+  img.addEventListener('error', () => {
+    img.hidden = true; missing.hidden = false;
+    missing.textContent = 'Image not added yet. Add this file to the images folder:';
+    const c = document.createElement('code'); c.textContent = sec.slides[i].src; missing.appendChild(c);
+  });
+  img.addEventListener('click', () => openLb(img.src, img.alt));
+  el.querySelector('.prev').addEventListener('click', () => go(i - 1));
+  el.querySelector('.next').addEventListener('click', () => go(i + 1));
+  show.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft') go(i - 1);
+    if (e.key === 'ArrowRight') go(i + 1);
+  });
+  let x0 = null;
+  show.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, {passive:true});
+  show.addEventListener('touchend', e => {
+    if (x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0; x0 = null;
+    if (Math.abs(dx) > 50) go(i + (dx < 0 ? 1 : -1));
+  });
+  go(0);
+});
+</script>
+</body>
+</html>
