@@ -53,7 +53,7 @@ section .intro{margin:0 0 1.5rem;max-width:46rem;color:var(--muted);font-size:1.
 .nav:hover{border-color:var(--accent);color:var(--accent)}
 .prev{left:.7rem}.next{right:.7rem}
 .meta{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;margin-top:.8rem;min-height:1.6rem}
-.cap{margin:0;color:var(--text);font-size:1rem;max-width:46rem}
+.cap{margin:0;color:#fff;font-size:1.3rem;font-weight:600;line-height:1.35;max-width:46rem;border-left:3px solid var(--accent);padding-left:.8rem}
 .tools{display:flex;gap:1rem;align-items:baseline;white-space:nowrap;font-size:.9rem;color:var(--muted)}
 .dots{display:flex;flex-wrap:wrap;gap:.2rem;margin-top:.4rem}
 .dots button{width:1.9rem;height:1.9rem;border:0;background:none;cursor:pointer;display:grid;place-items:center;padding:0}
@@ -111,12 +111,12 @@ footer{max-width:70rem;margin:0 auto;padding:3rem 1.25rem 3rem;color:var(--muted
    Leave caption as '' for no caption. Order here = order on the page.
    ============================================================ */
 const SECTIONS = [
-  { id:'mcsa',  title:'MCSA graphics and tables', slides:[
+  { id:'mcsa',  title:'MCSA graphics', slides:[
     {src:'images/Full_fft_mcsa_0T.png',  caption:'Current FFT at no load'},
     {src:'images/Full_fft_mcsa_5T.png',  caption:'Current FFT at 5% servo load'},
     {src:'images/Full_fft_mcsa_20T.png', caption:'Current FFT at 20% servo load'},
   ]},
-  { id:'flux',  title:'Magnetic flux graphics and tables', slides:[
+  { id:'flux',  title:'Magnetic flux graphics', slides:[
     {src:'images/flux_0T.png',  caption:'Flux FFT at no load'},
     {src:'images/flux_5T.png',  caption:'Flux FFT at 5% servo load'},
     {src:'images/flux_20T.png', caption:'Flux FFT at 20% servo load'},
